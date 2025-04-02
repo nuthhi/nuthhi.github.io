@@ -1,0 +1,142 @@
+html {
+    font-size: 16px;
+}
+
+body {
+    background-color: #fcfcfc;
+    color: #36393d;
+    font-family: "Helvetica", Arial, sans-serif;
+    max-width: 800px;
+    margin: 5% auto;
+    padding: 0 5%;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 0;
+}
+
+h2 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 0;
+}
+
+p {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+h1, h2, p {
+    color: inherit;
+}
+
+/* Dark mode */
+body.dark-mode {
+    background-color: #121212;
+    color: #fcfcfc; 
+}
+
+body.dark-mode h1, body.dark-mode h2, body.dark-mode p {
+    color: inherit;
+}
+
+/* Dark mode toggle */
+.switch {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    background-color: #ccc;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.switch input {
+    display: none; /* Hide the default checkbox */
+}
+
+.switch-label {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    background-color: #fff;
+    border-radius: 50px;
+    transition: transform 0.3s;
+}
+
+/* When toggled */
+.switch input:checked + .switch-label {
+    transform: translateX(100%);
+    background-color: #4CAF50;
+}
+
+.big {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 48px;
+    font-weight: bold;
+    color: black;
+    text-align: left;
+    letter-spacing: -.15rem;
+}
+
+#link {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 15px;
+}
+
+#link li a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: .8em;
+    padding: 5px 10px;
+    display: block;
+    transition: all ease .3s;
+    border-radius: 5px;
+    color: inherit;
+}
+
+#link li a:hover {
+    background-color: rgb(101, 85, 250);
+    color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    body {
+        max-width: 100%;
+        padding: 0 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    p {
+        font-size: 0.9rem;
+    }
+
+    .switch {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 18px;
+    }
+
+    .switch-label {
+        width: 50%;
+        height: 100%;
+    }
+}
