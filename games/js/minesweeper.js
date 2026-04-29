@@ -110,7 +110,7 @@ class Minesweeper {
       console.log('wrongFlag:', wrongFlag);
       if (wrongFlag) {
         for (const adjCell of this.getAdjacentCells(row, col))
-          if (adjCell.isMine) { this.select(adjCell.row, adjCell.col); return; }
+          if (adjCell.isMine && !adjCell.isFlagged) { this.select(adjCell.row, adjCell.col); return; }
         return;
       }
       // chord if no unflagged mines
