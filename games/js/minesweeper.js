@@ -103,13 +103,26 @@ class Minesweeper {
     // select revealed
     // if all adjacent mines are flagged, reveal all unrevealed non-flagged neighbors
     if (cell.isRevealed) {
+      // check if any wrong flags (game over)
+      let wrongFlag = false;
+      for (const adjCell of this.getAdjacentCells(row, col))
+        if (adjCell.isFlagged && !adjCell.isMine) { wrongFlag = true; break; }
+      console.log('wrongFlag:', wrongFlag);
+      if (wrongFlag) {
+        for (const adjCell of this.getAdjacentCells(row, col))
+          if (adjCell.isMine) { this.select(adjCell.row, adjCell.col); return; }
+        return;
+      }
+      // chord if no unflagged mines
       let anyUnflagged = false;
       for (const adjCell of this.getAdjacentCells(row, col))
         if (adjCell.isMine && !adjCell.isFlagged) { anyUnflagged = true; break; }
-      if (!anyUnflagged)
+      console.log('anyUnflagged:', anyUnflagged);
+      if (!anyUnflagged) {
         for (const adjCell of this.getAdjacentCells(row, col))
           if (!adjCell.isFlagged && !adjCell.isMine && !adjCell.isRevealed)
             this.select(adjCell.row, adjCell.col);
+      }
     } else {
       // select unrevealed
       // if no adjacent mines, cascade
