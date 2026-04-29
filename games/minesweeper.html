@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minesweeper</title>
+  <link rel="stylesheet" href="../global.css">
+  <link rel="stylesheet" href="css/minesweeper.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <a href="../index.html" class="home-btn" title="Home"><i class="fa-solid fa-house"></i></a>
+
+  <div id="game-body">
+
+    <div id="hud">
+      <div class="lcd" id="hud-mines">010</div>
+      <div id="btn-smiley">🙂</div>
+      <div class="lcd" id="hud-timer">000</div>
+    </div>
+
+    <div id="board-wrap">
+      <div id="board"></div>
+    </div>
+  </div>
+
+  <div id="config-body">
+    <button class="win-btn diff-btn" data-rows="9"  data-cols="9"  data-mines="10">Beginner</button>
+    <button class="win-btn diff-btn" data-rows="16" data-cols="16" data-mines="40">Intermediate</button>
+    <button class="win-btn diff-btn" data-rows="16" data-cols="30" data-mines="99">Expert</button>
+  </div>
+
+  <script src="js/minesweeper.js"></script>
+</body>
+</html>

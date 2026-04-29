@@ -1,0 +1,323 @@
+@import url('https://fonts.googleapis.com/css2?family=Nova+Mono&display=swap');
+/* may change font later this one is kinda buns */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --win-bg:          silver;
+  --win-light:       white;
+  --win-mid:         silver;
+  --win-dark:        grey;
+  --win-darker:      #404040;
+  --win-black:       black;
+  --win-title-start: navy;
+  --win-title-end:   dodgerblue;
+  --win-title-text:  white;
+  --lcd-bg:          black;
+  --lcd-red:         red;
+  --c1: blue;
+  --c2: green;
+  --c3: red;
+  --c4: navy;
+  --c5: maroon;
+  --c6: teal;
+  --c7: purple;
+  --c8: grey;
+  --font-ui: 'MS Sans Serif', 'Segoe UI', Tahoma, Arial, sans-serif;
+  --font-lcd: 'Nova Mono', monospace;
+}
+
+body {
+  zoom: 200%;
+  font-family: var(--font-ui);
+  font-size: 11px;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 24px 16px 40px;
+  gap: 16px;
+  color: var(--win-black);
+}
+
+.bevel-out {
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+}
+
+.bevel-in {
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-light);
+  border-bottom: 2px solid var(--win-light);
+}
+
+.bevel-out-sm {
+  border-top:    1px solid var(--win-light);
+  border-left:   1px solid var(--win-light);
+  border-right:  1px solid var(--win-darker);
+  border-bottom: 1px solid var(--win-darker);
+}
+
+#config-window {
+  background: var(--win-mid);
+  width: 100%;
+  max-width: 400px;
+}
+
+#config-body {
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+}
+
+.diff-btn {
+  flex: 1;
+}
+
+.win-btn {
+  background: var(--win-mid);
+  font-family: var(--font-ui);
+  font-size: 11px;
+  color: var(--win-black);
+  cursor: pointer;
+  padding: 3px 12px;
+  min-width: 75px;
+  height: 23px;
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  white-space: nowrap;
+}
+
+.win-btn:active,
+.win-btn.pressed {
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-light);
+  border-bottom: 2px solid var(--win-light);
+  padding: 4px 11px 2px 13px;
+}
+
+#game-body {
+  background: var(--win-bg);
+  padding: 6px;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 6px;
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  margin: 6px;
+}
+
+#hud {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 36px;
+  padding: 0;
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-light);
+  border-bottom: 2px solid var(--win-light);
+  box-sizing: border-box;
+}
+
+.lcd {
+  background: var(--lcd-bg);
+  color: var(--lcd-red);
+  font-family: var(--font-lcd);
+  font-size: 22px;
+  line-height: 1;
+  padding: 2px 4px 0;
+  flex: 1;
+  width: 52px;
+  height: 100%;
+  text-align: right;
+  letter-spacing: 2px;
+  border-top:    1px solid var(--win-darker);
+  border-left:   1px solid var(--win-darker);
+  border-right:  1px solid var(--win-light);
+  border-bottom: 1px solid var(--win-light);
+  user-select: none;
+}
+
+#btn-smiley {
+  background: var(--win-mid);
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  height: 100%;
+  width: 36px;
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+  line-height: 1;
+}
+
+#btn-smiley:active,
+#btn-smiley.pressed {
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-light);
+  border-bottom: 2px solid var(--win-light);
+}
+
+#board-wrap {
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-light);
+  border-bottom: 2px solid var(--win-light);
+  overflow: auto;
+  max-width: 100%;
+  line-height: 0;
+}
+
+#board {
+  display: inline-grid;
+  gap: 0;
+  user-select: none;
+}
+
+
+.cell {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: var(--font-ui);
+  cursor: pointer;
+  position: relative;
+}
+
+.cell.hidden {
+  background: var(--win-mid);
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+}
+
+.cell.hidden:active {
+  border-top:    1px solid var(--win-dark);
+  border-left:   1px solid var(--win-dark);
+  border-right:  1px solid var(--win-dark);
+  border-bottom: 1px solid var(--win-dark);
+  background: var(--win-mid);
+}
+
+.cell.revealed {
+  background: var(--win-mid);
+  border: 1px solid var(--win-dark);
+  cursor: default;
+}
+
+.cell.flagged {
+  background: var(--win-mid);
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+  cursor: pointer;
+}
+
+.cell.mine-hit {
+  background: red;
+  border: 1px solid var(--win-dark);
+  cursor: default;
+}
+
+.cell.mine-revealed {
+  background: var(--win-mid);
+  border: 1px solid var(--win-dark);
+  cursor: default;
+}
+
+.cell.wrong-flag {
+  background: var(--win-mid);
+  border: 1px solid var(--win-dark);
+  cursor: default;
+}
+
+.cell[data-n="1"] { color: var(--c1); }
+.cell[data-n="2"] { color: var(--c2); }
+.cell[data-n="3"] { color: var(--c3); }
+.cell[data-n="4"] { color: var(--c4); }
+.cell[data-n="5"] { color: var(--c5); }
+.cell[data-n="6"] { color: var(--c6); }
+.cell[data-n="7"] { color: var(--c7); }
+.cell[data-n="8"] { color: var(--c8); }
+
+.cell.mine-hit::after,
+.cell.mine-revealed::after {
+  content: '✸';
+  font-size: 12px;
+  color: var(--win-black);
+}
+
+.cell.flagged::after {
+  content: '🚩';
+  font-size: 10px;
+}
+
+.cell.wrong-flag::after {
+  content: '🚩';
+  font-size: 10px;
+  position: relative;
+}
+
+.cell.wrong-flag::before {
+  content: '✕';
+  font-size: 13px;
+  font-weight: bold;
+  color: red;
+  position: absolute;
+  z-index: 1;
+}
+
+.home-btn {
+  position: fixed;
+  top: 8px;
+  left: 8px;
+  font-size: 20px;
+  text-decoration: none;
+  background: var(--win-mid);
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top:    2px solid var(--win-light);
+  border-left:   2px solid var(--win-light);
+  border-right:  2px solid var(--win-darker);
+  border-bottom: 2px solid var(--win-darker);
+}
+
+.home-btn:active {
+  border-top:    2px solid var(--win-darker);
+  border-left:   2px solid var(--win-darker);
+  border-right:  2px solid var(--win-light);
+  border-bottom: 2px solid var(--win-light);
+}
