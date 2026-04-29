@@ -25,25 +25,32 @@ class Minesweeper {
     this.isFirstTurn = true;
     this.gameOver = false;
     this.won = false;
-    this.generateField();
-  }
-
-  generateField() {
+    // generate empty field for now
     this.field = [];
     for (let r = 0; r < this.rows; r++) {
       this.field[r] = [];
       for (let c = 0; c < this.cols; c++)
         this.field[r][c] = new Cell(r, c);
     }
+  }
 
+  generateField(safeRow,safeCol) {
     // fisher-yates shuffle
     const flat = this.field.flat();
     for (let i = flat.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [flat[i], flat[j]] = [flat[j], flat[i]];
     }
-    for (let i = 0; i < this.mineCount; i++) flat[i].setMine();
 
+    const totalCells = this.rows*this.cols;
+    const allMines = this.mineCount >= totalCells;
+    let placed = 0;
+    for(const cell of flat) {
+      if(placed >= this.mineCount) break;
+      if(!allMines && cell.row === safeRow && cell.col === safeCol) continue;
+      cell.setMine();
+      placed++;
+    }
     // set touchingCount
     for (let r = 0; r < this.rows; r++)
       for (let c = 0; c < this.cols; c++)
@@ -82,21 +89,22 @@ class Minesweeper {
     const wasFirst = this.isFirstTurn;
     this.isFirstTurn = false;
 
+    // first turn reveal cell and open all safe neighbors
+    if (wasFirst) {
+      this.generateField(row,col);
+      cell.reveal();
+      for (const adjCell of this.getAdjacentCells(row, col))
+        if (!adjCell.isFlagged && !adjCell.isMine)
+          this.select(adjCell.row, adjCell.col);
+      return;
+    }
+
     // hit mine
     if (cell.isMine) {
       cell.reveal();
       cell.hitMine = true;
       this._revealAllMines();
       this.gameOver = true;
-      return;
-    }
-
-    // first turn reveal cell and open all safe neighbors
-    if (wasFirst) {
-      cell.reveal();
-      for (const adjCell of this.getAdjacentCells(row, col))
-        if (!adjCell.isFlagged && !adjCell.isMine)
-          this.select(adjCell.row, adjCell.col);
       return;
     }
 
@@ -107,7 +115,6 @@ class Minesweeper {
       let wrongFlag = false;
       for (const adjCell of this.getAdjacentCells(row, col))
         if (adjCell.isFlagged && !adjCell.isMine) { wrongFlag = true; break; }
-      console.log('wrongFlag:', wrongFlag);
       if (wrongFlag) {
         for (const adjCell of this.getAdjacentCells(row, col))
           if (adjCell.isMine && !adjCell.isFlagged) { this.select(adjCell.row, adjCell.col); return; }
@@ -117,7 +124,6 @@ class Minesweeper {
       let anyUnflagged = false;
       for (const adjCell of this.getAdjacentCells(row, col))
         if (adjCell.isMine && !adjCell.isFlagged) { anyUnflagged = true; break; }
-      console.log('anyUnflagged:', anyUnflagged);
       if (!anyUnflagged) {
         for (const adjCell of this.getAdjacentCells(row, col))
           if (!adjCell.isFlagged && !adjCell.isMine && !adjCell.isRevealed)
