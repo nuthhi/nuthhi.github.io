@@ -1,7 +1,7 @@
 // Diamond: every column stretch that doesn't reach the top row needs an S on its top cell
 name: Diamond
 moves: 15
-goal: score 120
+goal: score 50
 ---
 ###.###
 ##s.s##
